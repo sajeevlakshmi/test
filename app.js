@@ -37,7 +37,7 @@ moment().tz("America/Los_Angeles").format();
 
 db.connect((err)=>{
   if(err) 
-  console.log("connection failed")
+  console.log("connection failed" + err)
   else
   console.log("database connected successfully")
 })
