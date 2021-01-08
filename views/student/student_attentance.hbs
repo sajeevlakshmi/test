@@ -1,0 +1,77 @@
+<section>
+
+  <div class="container-flex mt-5 pt-2 content">
+    <div class="row  ">
+      <div class="col-lg-12 col-md-6 col-xs-4 ">
+        <div >
+          
+          <input class="float-right" type="text"id="percen">
+          <label class="float-right">Attentance Percentage  : </label>
+        <table class="table " id="table">
+          <thead class="thead-dark">
+            <tr>
+              <th>Attentance</th>
+
+
+              <th> <input type="month" id="date" name="start" min="2020-01" max="2021-12" value="2020-12"></th>
+              <th></th>
+              <th><button type="button" onclick="attentance()">Show Attentance</button></th>
+            </tr>
+          </thead>
+          <tr>
+            <th>Seial No</th>
+            </t>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+          </thead>
+          <tbody id="tBody"></tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script type="text/javascript">
+  function attentance() {
+    var select_date = $("#date").val();
+    console.log(select_date);
+    console.log("ajax call")
+    $.ajax({
+      url: '/student/student_attentance',
+      data: {
+        date: select_date
+      },
+      method: 'post',
+      success: function (resp) {
+        console.log(resp)
+         $('#percen').val(resp.array[1])
+          $('#tBody').empty()
+        display(resp)
+      }
+    })
+  };
+  function display(resp) {
+
+    var trHTML = '';
+    $.each(resp, function (i, array) {
+      for (i = 0; i < resp.array[0].length; i++) {
+        trHTML +=
+          '<tr><td>'
+          + resp.array[0][i].no
+          + '</td><td>'
+          + resp.array[0][i].date
+          + '</td><td>'
+          + resp.array[0][i].status
+          + '</td></tr>';
+      }
+    });
+    //console.log(resp.array[1])   
+    $('#tBody').append(trHTML);
+
+
+  }
+
+
+
+</script>

@@ -1,0 +1,64 @@
+<section>
+    <div class="container-flex mt-5 pt-2 content">
+        <div class="row pl-5 ">
+            <div class="col-lg-12 col-md-6 col-xs-4">
+                <h2 class="text-center">Notes</h2>
+                <form action="/teacher_notes" method="post" enctype="multipart/form-data">
+
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" name="name" value="">
+                        <label for="">Document File</label>
+
+                        <input type="file" class="form-control" name="document" onchange="">
+
+                        <label for="">Video</label>
+
+                        <input type="file" class="form-control" name="video" onchange="">
+
+
+                        <button type="submit" class="btn btn-success mt-4">Save</button>
+                    </div>
+                </form>
+                <div>
+
+                    <table class="table mt-5">
+                        <thead>
+                            <tr>
+                                <th scope="col">Topic </th>
+
+                                <th scope="col">video</th>
+                                <th scope="col">File</th>
+                                <th scope="col">Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each notes}}
+                            <tr>
+
+                                <td>{{this.name}}</td>
+
+                                <td>
+                                    <video controls loop width="100px" height="100px">
+                                        <source src="/video/{{this._id}}{{this.filename}}.mp4">
+                                    </video>
+                                <td><a
+                                        href="/teacher/notes/{{this._id}}/{{this.documentname}}">{{this.documentname}}</a>
+                                </td>
+
+                                <td>
+                                    <a href="/teacher/delete-notes/{{this._id}}" class="btn btn-danger"
+                                        onClick=" return confirm('Are you sure to delete{{this.name}}')">Delete</a>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>

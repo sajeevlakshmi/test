@@ -1,0 +1,23 @@
+<section>
+     <div class="container box1 border border-secondary">
+        <div class="row  ">
+            <div class="col-lg-12 text-center ">
+                  {{#if otpError}}
+          <p class="error ">{{otpError}}</p>
+         
+          {{/if}}
+          </div>
+          </div>
+          <div class="row">
+          <div class="col lg 12 box2 ml-3 mr-3 border border-secondary">
+    <form  method="post" action="/student/send-otp" enctype="multipart/form-data">
+    <label><b>Enter the registered mobile number</b></label>
+   <div class="mt-2 form-group"> <input class="from-control" type="tel" name="number" placeholder=""/></div>
+   <div class="pt-4 form-group"><input class="from-control rounded" type="submit" value="Send code" /> </div> 
+</form>
+</div>
+</div>
+
+
+     </div>
+</section>

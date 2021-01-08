@@ -1,0 +1,53 @@
+<section>
+    <div class="container-flex mt-5 pt-2 content">
+        <div class="row pl-5 ">
+            <div class="col-lg-12 col-md-6 col-xs-4">
+                <h4 class="text-center ">ADD STUDENTS</h4>
+                <form action="/teacher/add-students" method="post" enctype="multipart/form-data">
+                    <div id="right-side">
+                        <label for="">Profile Photo</label>
+                        <img src="" id="profilepic">
+                        <input type="file" class="form-control" name="image" onchange="viewImage(event)">
+                    </div>
+
+                    <label for="">Roll No</label>
+                    <input type="text" class="form-control" name="rollno">
+
+                    <label for="">Name</label>
+                    <input type="text" class="form-control" name="name">
+
+                    <label>Gender</label><br>
+
+                    <label for="male">Male</label>
+                    <input type="radio" id="male" name="gender" value="male">
+
+                    <label for="male">female</label>
+                    <input type="radio" id="male" name="gender" value="female"><br>
+
+                    <label for="">Mobile</label>
+                    <input type="tel" class="form-control" name="mobile">
+
+                    <label for="">Email</label>
+                    <input type="email" class="form-control" name="email">
+
+                    <label for="">Password</label>
+                    <input type="password" class="form-control" name="password">
+
+
+                    <label for="">Address</label>
+                    <input type="text" class="form-control" name="address">
+
+
+
+
+                    <button type="submit" class="btn btn-info mt-4">ADD</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    function viewImage(event) {
+        document.getElementById('profilepic').src = URL.createObjectURL(event.target.files[0])
+    }
+</script>

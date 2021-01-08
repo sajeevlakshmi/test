@@ -1,0 +1,43 @@
+<section>
+ <div class="container-flex mt-5 pt-2 content">
+    <div class="row pl-3 ">
+      <div class="col-lg-12 col-md-6 col-xs-4">
+                <h4 class="text-center">PROFILE</h4>
+                <form action="" method="get" enctype="multipart/form-data">
+                   <div id="right-side">
+              <label for="">Profile Photo</label>
+              <img src="/images/{{student._id}}.jpg" id="profilepic">
+                      </div>
+                    <label for="">Roll No</label>
+                    <input type="text" class="form-control" name="rollno"  value="{{student.rollno}}" readonly>
+
+                    <label for="">Name</label>
+                    <input type="text" class="form-control" name="name" value="{{student.name}}" readonly>
+                    
+                    <label >Gender</label><br>
+                   
+                    <label for="male">Male</label>
+                    
+                    <input type="radio" id="male" name="gender" value="{{student.gender}}" checked="{{#if 'student.gender=="male"'}}" readonly>
+                    
+                    <label for="male">female</label>
+                    
+                    <input type="radio" id="male" name="gender" value="{{student.gender}}" checked="" readonly>
+                   {{/if}}
+                  
+                    <br>
+                    <label for="">Mobile</label>
+                    <input type="tel" class="form-control" name="mobile" value="{{student.mobile}}" readonly>
+
+                    <label for="">Email</label>
+                    <input type="email" class="form-control" name="email" value="{{student.email}}" readonly>                 
+
+                    <label for="">Address</label>
+                    <input type="text" class="form-control" name="address" value="{{student.address}}" readonly>
+
+                            
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

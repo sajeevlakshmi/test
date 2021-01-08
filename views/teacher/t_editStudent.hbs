@@ -1,0 +1,52 @@
+<section>
+  <div class="container-flex mt-5 pt-2 content">
+    <div class="row pl-5 ">
+      <div class="col-lg-12 col-md-6 col-xs-4">
+                <h4 class="text-center pt-2">EDIT STUDENT DETAILS</h4>
+                <form action="/teacher/edit-students/{{student._id}}" method="post" enctype="multipart/form-data">
+                 <div id="right-side">
+              <label for="">Profile Photo</label>
+              <img src="/images/{{student._id}}.jpg" id="profilepic">
+               <input type="file" class="form-control" name="image" onchange="viewImage(event)">
+        </div>
+                    <label for="">Roll No</label>
+                    <input type="text" class="form-control" name="rollno"  value="{{student.rollno}}">
+
+                    <label for="">Name</label>
+                    <input type="text" class="form-control" name="name" value="{{student.name}}">
+                    
+                    <label >Gender</label><br>
+                   
+                    <label for="male">Male</label>
+                    
+                    <input type="radio" id="male" name="gender" value="{{student.gender}}" checked="{{#if 'student.gender=="male"'}}">
+                    
+                    <label for="male">female</label>
+                    
+                    <input type="radio" id="male" name="gender" value="{{student.gender}}" checked="">
+                   {{/if}}
+                  
+                    <br>
+                    <label for="">Mobile</label>
+                    <input type="tel" class="form-control" name="mobile" value="{{student.mobile}}">
+
+                    <label for="">Email</label>
+                    <input type="email" class="form-control" name="email" value="{{student.email}}">
+
+                    <label for="">password</label>
+                    <input type="password" class="form-control" name="password" value="{{student.password}}">
+
+                    <label for="">Address</label>
+                    <input type="text" class="form-control" name="address" value="{{student.address}}">
+
+                    <button type="submit" class="btn btn-info mt-4">UPDATE</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    function viewImage(event) {
+        document.getElementById('profilepic').src = URL.createObjectURL(event.target.files[0])
+    }
+</script>

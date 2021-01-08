@@ -1,0 +1,23 @@
+ <div class="container-flex mt-5 pt-2 content">
+        <div class="row pl-3 mt-3 ">
+            <div class="col-lg-12 col-md-6 col-xs-4 ">
+               
+                  <form action="/student/paynow" method="post" enctype="multipart/form-data" class="border border-secondary pl-2">
+                  <h3 style="text-align: center;">PayTM payment</h3>
+                   <input type="hidden" id="studId" name="studId" value="{{student._id}}" />
+                   <label>Name:</label>
+                   <input type="text" class="form-control" id="name" name="name" value="{{student.name}}"></br>
+                     <label>Amount:</label>
+                    <input type="text" class="form-control" id="fees" name="fees" value= {{details.fees}}></br>
+                     <label>Email:</label>
+                     <input type="text" class="form-control" id="email" name="email" value="{{student.email}}"></br>
+                       <label>Mobile No:</label>
+                      <input type="text" class="form-control" id="phone" name="phone" value="{{student.mobile}}"></br>
+                     <label>Event Name:</label>
+                    <input type="text" class="form-control" id="phone" name="event" value="{{details.event}}"></br>
+                   <button type="submit" value="" class=" mt -2  btn btn-primary float-center"> proceed
+                            </button>
+                  </form>  
+                  </div>
+                  </div>
+                  </div> 

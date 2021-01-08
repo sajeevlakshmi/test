@@ -1,0 +1,192 @@
+body {
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.bg {
+  background-image: url("/images/teacher.jpg");
+  height: 550px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+.bg1 {
+  background-image: url("/images/student3.jpg");
+  height: 550px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  
+}
+
+.footer {
+  padding: 6em 0 3em;
+}
+.flex-container{
+  
+  min-height: 300px;
+  margin: 0 auto;
+  
+}
+ .column{
+  width: 25%;
+  padding: 10px;
+  background: #dbdfe5;
+   float: left;
+   height: auto ;
+   margin-top: 10px;
+  
+}
+
+.box1{
+  
+  margin-top: 50px;
+  width: 500px;
+  
+  padding: 10px;
+  background: rgb(122, 190, 116);
+  height: 450px;
+  align-items: center;
+}
+.box2{
+  
+  width: 200px;
+   background: white;
+  height: 200px;
+  text-align: center;
+margin-top: 100px;
+  
+
+}
+.column.bg-alt{
+  width: 75%;
+  background: hsl(214, 6%, 75%);
+  float: left;
+
+}
+.logout_style{
+  color: #fff;
+}
+.homecarousel {
+  width: 75%;
+  float: left;
+  
+}
+
+   .carousel-item {
+    height: 200px;
+    
+  }
+  
+
+textarea.form-control {
+    height: 250px;
+    width: 473px;
+    float: left;
+}
+.form-control{
+  width: 50%;
+  align-items: center;
+}
+.list-group-item {
+  height: 60px;
+}
+
+  
+  #right-side {
+    display: inline;
+    float: right;
+    text-align: right;
+  }
+  
+  
+  #profilepic {
+    height:100px; 
+    width :100px; 
+    border-radius:50px;
+  }
+ /* .col-md-4{
+    padding-left: 115px;
+  }*/
+  .space { margin-top: 280px; }
+  
+  .bgColor{
+    background: #dbdfe5;
+  }
+  #myProgress {
+    width: 100%;
+    background-color: #ddd;
+  }
+  
+  #myBar {
+    width: 1%;
+    height: 30px;
+    background-color: #4CAF50;
+  }
+  .navbar {
+    overflow: hidden;
+    background-color: #333;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+    z-index: 1;
+  }
+ 
+  .sidebar {
+    margin: 0;
+    padding: 1;
+    width: 300px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: hidden;
+  
+  }
+  
+  /* Sidebar links */
+  .sidebar a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+  }
+  
+  /* Active/current link */
+  .sidebar a.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  /* Links on mouse-over */
+  .sidebar a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+  }
+  
+  /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+  div.content {
+    margin-left: 280px;
+    padding: 1px 16px;
+    height: 1000px;
+  }
+  
+  /* On screens that are less than 700px wide, make the sidebar into a topbar */
+ @media screen and (max-width: 700px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .sidebar a {float: left;}
+    div.content {margin-left: 0;}
+  }
+  
+  /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+  @media screen and (max-width: 400px) {
+    .sidebar a {
+      text-align: center;
+      float: none;
+    }
+  }               
+  

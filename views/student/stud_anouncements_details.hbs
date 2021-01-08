@@ -1,0 +1,46 @@
+<section>
+    <div class="container-flex mt-5 pt-2 content">
+        <div class="row pl-3">
+            <div class="col-lg-12 col-md-6 col-xs-4  ">
+                 <h2 class="text-center"> Anouncements</h2>
+
+                <form action="/teacher_anouncements" method="post" enctype="multipart/form-data" class="border border-secondary">
+                    <div class="form-group pl-2  ">
+                        <label for="usr">Message:</label>
+                        <input type="text" class="form-control border border-secondary" id="usr" name="message" value="{{details.message}}" readonly>
+                    </div>
+                    <div class="form-group pl-2">
+                        <label for="comment">Description:</label><br>
+                      <input type="text" class="form-control border border-secondary" id="usr" name="message" value="{{details.description}}"readonly>
+                    </div>
+                    
+             
+        <div class="row pl-2">
+            <div class=" col-md-6 col-xs-4 ">
+                <img style="width: 25rem;height:18rem" src="/images/{{details._id}}{{details.ImgName}}.jpg"
+                    id="imageFile">
+            </div>
+            <div class=" col-md-6 col-xs-4">
+                {{!-- <video controls loop style="width:25rem;height:18rem" id="videopic">
+                    <source src="/video/{{details._id}}{{details.filename}}.mp4">
+                </video>--}}
+                <div class="embed-responsive embed-responsive-4by3 ml-1" style="width:25rem;height:18rem;">
+                    <iframe class="embed-responsive-item" src="/video/{{details._id}}{{details.filename}}.mp4"></iframe>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row pl-2 mt-3">
+            <div class=" col-md-6 col-xs-4 ">
+                <div class="embed-responsive embed-responsive-4by3 border border-secondary " style="width:25rem;height:18rem;">
+                    <iframe class="embed-responsive-item"
+                        src="/student/anouncementView/{{details._id}}/{{details.docName}}">{{details.docName}}</iframe>
+                </div>
+ 
+            </div>
+        </div>
+        </form>
+    </div>
+
+</section>

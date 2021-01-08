@@ -1,0 +1,84 @@
+<section>
+     <div class="container-flex mt-5 pt-2 content">
+    <div class="row pl-3 ">
+      <div class="col-lg-12 col-md-6 col-xs-4">
+          <div>                 
+                <h4 class="text-center pt-2">Assignments submitted by {{subAssign.name}}</h4>
+                
+            
+                    <form action="" method="get" enctype="multipart/form-data">
+                    <label for="">Roll No</label>
+                    <input type="text" class="form-control" name="rollno"  value="{{subAssign.rollno}}" readonly>
+
+                    <label for="">Name</label>
+                    <input type="text" class="form-control" name="name" value="{{subAssign.name}}"readonly>
+                    
+                                     
+                   <label for="">Mobile</label>
+                    <input type="tel" class="form-control" name="mobile" value="{{subAssign.mobile}}" readonly>
+
+                    <label for="">Email</label>
+                    <input type="email" class="form-control" name="email" value="{{subAssign.email}}" readonly>
+
+                </form>
+                </div>
+   <p class="text-center pt-3">Assignments</p>
+                <div>
+                    <table class="table mt-5">
+                        <thead>
+                            <tr>
+                                <th scope="col">Topic </th>
+
+                                <th scope="col">File</th>
+                                <th scope="col">Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each subAssign.assignments}}
+                            <tr>
+                                
+                                <td>{{this.name}}</td>
+
+                                <td><a href="/student/subAssignments/{{this.AssignId}}/{{this.filename}}">{{this.filename}}</a></td>
+                                <td>
+                                    <a href="/student/subAssignments/{{this.AssignId}}/{{this.filename}}" class="btn btn-secondary">Open</a>
+                                </td>
+                            </tr>
+                            {{/each}}                   
+                        </tbody>
+                    </table>
+                </div>
+
+  <div>
+        <p class="text-center pt-3">Attentance</p>
+                    <table class="table mt-5">
+                        <thead>
+                            <tr>
+                                <th scope="col">Day</th>
+
+                                <th scope="col">Date</th>
+                                <th scope="col">Status</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each attentance}}
+                            <tr>
+                                
+                                <td>{{this.no}}</td>
+
+                                <td>{{this.date}}</a></td>
+                                <td>
+                                    {{this.status}}
+                                </td>
+                            </tr>
+                            {{/each}}                   
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

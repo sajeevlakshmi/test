@@ -1,0 +1,82 @@
+<section>
+    <div class="container-flex mt-5 pt-2 content">
+        <div class="row pl-1 ">
+            <div class="col-lg-12 col-md-6 col-xs-4">
+                <h2 class="text-center">Assignments</h2>
+
+
+                <div class="form-group ">
+                    <form action="/student/student_assignments" method="post" enctype="multipart/form-data">
+
+
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" name="name">
+
+                        <label for="">File</label>
+
+                        <input type="file" class="form-control" name="pdf" id="file" onchange="return fileValidation()">
+
+
+                        <button type="submit" class="btn btn-primary mt-4 "
+                            onClick=" return confirm('File  submitted successfully')">Submit</button>
+
+                     {{!--   <a href="/teacher/students/{{userId}}" class="btn btn-secondary float-right">Assignments
+                            Submitted</a>--}}
+
+                    </form>
+                </div>
+                <div>
+
+                    <table class="table mt-5 display" id="assignTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">Topic </th>
+
+                                <th scope="col">File</th>
+                                <th scope="col">Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each assignments}}
+                            <tr>
+
+                                <td>{{this.name}}</td>
+
+                                <td><a href="/teacher/assignments/{{this._id}}/{{this.filename}}">{{this.filename}}</a>
+                                </td>
+                                <td>
+                                    <a href="/teacher/assignments/{{this._id}}/{{this.filename}}"
+                                        class="btn btn-success">Open</a>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function () {
+        $('#assignTable').DataTable();
+    });
+
+    function fileValidation() {
+        var fileInput =
+            document.getElementById('file');
+
+        var filePath = fileInput.value;
+
+        // Allowing file type 
+        var allowedExtensions = /(.pdf)$/i;
+
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Invalid file type,Please select  a PDF file');
+            fileInput.value = '';
+            return false;
+        }
+    } 
+</script>

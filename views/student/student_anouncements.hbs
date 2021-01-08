@@ -1,0 +1,29 @@
+<section>
+    <div class="container-flex mt-5 pt-2 content">
+    <div class="row pl-2 ">
+      <div class="col-lg-12 col-md-6 col-xs-4 ">
+                <h2 class="text-center"> Anouncements</h2>
+          
+                    <table class="table table-sm border border-light">
+                        <thead>
+                            <tr>
+
+                                <th scope="col">Date</th>
+                                <th scope="col">Subject</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each anouncements}}
+                            <tr class="table-active">
+
+                                <td class="">{{this.date}}</td>
+                                <td><a href="/student/anouncements-details/{{this._id}}">{{this.message}}</a></td>
+
+                            </tr>
+                            {{/each}}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>

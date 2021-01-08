@@ -1,0 +1,36 @@
+
+
+<section>
+  
+  <div class="row bg ">
+    <div class="col-md-6 m-auto ">
+      <div class="container mt-5 pl-5 ">
+
+        <form action="/login" method="post" enctype="">
+          <h2 class="text-center text-white">Teacher Login</h2>
+          {{#if loginErr}}
+          <p class="error text-white">{{loginErr}}</p>
+          {{/if}}
+
+          <div>
+            <label for="">Email</label>
+            <input type="email" class="form-control" name="email">
+          </div>
+          <div>
+            <label for="">Password</label>
+            <input type="password" class="form-control" name="password">
+          </div >
+           <div class="text-center">
+          <button type="submit" class="btn btn-primary float -right mt-3 text-center">Login</button>
+      </div>
+      </form>
+
+
+    </div>
+  </div>
+  
+
+      </div>
+</section>
+
+  

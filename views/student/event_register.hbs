@@ -1,0 +1,182 @@
+<section>
+     <div class="container-flex mt-5 pt-2 content">
+        <div class="row pl-4 ">
+            <div class="col-lg-12 col-md-6 col-xs-4 ">
+                <h2 class="text-center"> Event Registration</h2>
+
+                <form action="/event_register" method="post" enctype="multipart/form-data">
+                    <input type="hidden" id="studId" name="id" value="{{student._id}}" />
+
+                    <label for="">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{student.name}}">
+
+                    <label for="">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{student.email}}">
+                    <div class="mt-2">
+                        <label for="">Event Name</label>
+                        <input type="text" class="form-control" id="event" name="ename" value="{{details.event}}">
+                        {{#if details.fees}}
+                        <label for="">Event Fees</label>
+                        <input type="number" class="form-control" id="fees" name="fees" value="{{ details.fees }}">
+                        {{/if}}<br>
+                        <label for="">Payment Method</label><br>
+                                              
+                        <button type="submit" value="" class=" mt -2  btn btn-primary float-center"> Razorpay
+                            </button><br>
+                             <a class="btm btn-primary mt-4" href="/student/paypaltest/{{details._id}}">PAYPAL</a><br>   
+             <a class="btm btn-primary mt-4" href="/student/paytmtest/{{details._id}}">PAYTM</a><br>
+
+                    </div>
+
+                </form>
+            
+            </div> 
+        </div>
+    </div>   
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=ATghu8Vvnn-JIclUagn6zActrXznfBVwnrRvrwTBahZJ-9TyvEmU8caq2zQ4qqo-JWuZUB4TVM94c1vO"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+        </script>
+    <div id="paypal-button-container"></div>
+
+    <script>
+        paypal.Buttons({
+            createOrder: function (data, actions) {
+                let x = document.getElementById("fees").value
+               // let y= parseInt(x)*0.14
+                //console.log(y)
+               // This function sets up the details of the transaction, including the amount and line item details.
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: x
+                        }
+                    }]
+                });
+            },
+            onApprove: function (data, actions) {
+                // This function captures the funds from the transaction.
+                return actions.order.capture().then(function (details) {
+                    console.log(details)
+
+                    // This function shows a transaction success message to your buyer.
+                    alert('Transaction completed by ' + details.payer.name.given_name);
+                    if (details.status == "COMPLETED") {
+                        alert("registered successfully")
+                        updateEvent()
+                    }
+                });
+            }
+        }).render('#paypal-button-container');
+        function updateEvent() {
+
+            var email = document.getElementById("email").value
+            var studName = document.getElementById("name").value
+            var studId = document.getElementById("studId").value
+            var eventName = document.getElementById("event").value
+            var fees = document.getElementById("fees").value
+          $.ajax({
+              
+              url:'/student/paypal-register',
+              data:{
+                  email,
+                  studId,studName,eventName,fees
+
+              },
+              method:'POST',
+              success:(response)=>{
+                location.href = '/student/register_success'
+              }
+          })
+
+        }
+  //This function displays Smart Payment Buttons on your web page.
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            // process the form
+            $('form').submit(function (event) {
+
+                event.preventDefault();
+
+                var formData = {
+                    'name': $('input[name=name]').val(),
+                    'email': $('input[name=email]').val(),
+                    'studId': $('input[name=id]').val(),
+                    'event': $('input[name=ename]').val(),
+                    'fees': $('input[name=fees]').val(),
+                    //'payment-mode': $("input[name='payment']:checked").val(),
+                };
+                console.log(formData)
+
+                $.ajax({
+                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                    url: '/student/event_register', // the url where we want to POST
+                    data: formData, // our data object
+                    dataType: 'json', // what type of data do we expect back from the server
+                    success: (response) => {
+                        console.log(response)
+                        razorpayPayment(response)
+                    }
+
+                })
+
+            });
+        });
+        function razorpayPayment(order) {
+            console.log("order:", order)
+            var options = {
+                "key": "rzp_test_9coaZKRhVqP3Eo", // Enter the Key ID generated from the Dashboard
+                "amount": order.response.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Cross-roads",
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": order.response.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function (response) {
+
+
+                    verifyPayment(response, order)
+                },
+                "prefill": {
+                    "name": "Gaurav Kumar",
+                    "email": "gaurav.kumar@example.com",
+                    "contact": "9999999999"
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+        }
+
+        function verifyPayment(payment, order) {
+            $.ajax({
+                url: '/student/verify-payment',
+                data: {
+                    payment,
+                    order
+                },
+                method: 'post',
+                success: (response) => {
+                    if (response.status) {
+                        location.href = '/student/register_success'
+
+                    }
+                    else if (response.paypal) {
+                        location.href = '/student/register_success'
+                    }
+
+                    else {
+                        alert("registration failed")
+                    }
+
+                }
+
+            })
+        }
+    </script>

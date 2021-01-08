@@ -1,0 +1,27 @@
+<section>
+    <div class="container box1">
+        <div class="row  ">
+           
+            <div class="col-lg-12  border border-success box2"> 
+                     {{#if otpError}}
+          <p class="error ">{{otpError}}</p>
+          {{/if}}
+           <h3 >Enter OTP</h3>
+    <p>We have sent you a verification code!</p>
+<p>Please enter the code here:</p>
+         
+<form method="post" action="/student/verify-otp"enctype="multipart/form-data">
+    <input type="hidden" name="otp_id" value="{{otp_id}}" />
+    <input type="hidden" name="phone" value="{{number}}" />
+    <input type="text" name="otp" >
+    <input class="btn btn-success" type="submit" value="Enter code" >
+
+    </form>
+<form method="post" action="/student/resend-otp/{{otp_id}}"enctype="multipart/form-data">
+<input type="hidden" name="otp_id" value="{{otp_id}}">
+ <input type="submit" class="btn btn-danger mt-3" value="Resend OTP" >
+</form>
+</div>
+</div>
+</div>
+</section>
