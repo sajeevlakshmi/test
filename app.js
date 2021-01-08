@@ -23,13 +23,7 @@ var http =require("http")
 ///var socket=app.io();
 
 // Run when client connects
-app.io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on("sendnotification",function(details){
-    console.log(details)
-    socket.broadcast.emit("sendnotification",details);
-  })
-}) 
+
  
 
 
@@ -92,6 +86,14 @@ saveUninitialized: true,cookie:{maxAge:6000000}}))
 app.use('/', teacherRouter);
 app.use('/student', studentRouter);
 app.use('/callback',paytmVerifyRouter);
+
+app.io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on("sendnotification",function(details){
+    console.log(details)
+    socket.broadcast.emit("sendnotification",details);
+  })
+}) 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
