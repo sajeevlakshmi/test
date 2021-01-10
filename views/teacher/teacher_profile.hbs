@@ -10,7 +10,7 @@
 
           <div id="right-side">
             <label for=""></label>
-            <img src="/profile_image/{{this._id}}.jpg" id="profilepic">
+            <img src="/profile_image/{{this._id}}.jpg" id="profilepic" hidden>
 
           </div>
           <div class="form-group">
@@ -33,7 +33,7 @@
               for="">Email</label>
             <input type="email" class="form-control" name="email" value="{{this.email}}" readonly>
 
-            <button type="submit" class="btn btn-success mt-4">Edit Profile</button>
+            <button type="submit" class="btn btn-success mt-4" hidden>Edit Profile</button>
           </div>
         </form>
         {{/each}}
