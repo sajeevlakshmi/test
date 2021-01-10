@@ -10,7 +10,7 @@ global.Headers = fetch.Headers;
 var fs = require('fs');
 const { resolve } = require('path');
 const { response } = require('express');
-var Razorpay=require('Razorpay');
+var Razorpay=require('razorpay');
 const { ObjectID } = require('mongodb');
 
 
