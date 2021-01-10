@@ -1,7 +1,7 @@
-<div class="container mt-5 pt-2 content">
-  <div class="row ">
+<div class="container-fluid mt-5 pt-2 content">
+  <div class="row pl-1 ">
     <div class="col-lg-12 col-md-6 col-xs-4 ">
-      <div id="carouselExampleControls" class="carousel slide " data-ride="carousel">
+      <div id="carouselExampleControls" class="carousel slide " data-ride="carousel" >
         <div class="carousel-inner">
           <div class="carousel-item active">
             <img class="d-block w-100" src="images/image7.jpg" alt="First slide">
@@ -27,7 +27,7 @@
 
   <div class="row ml-1">
     <div class=" col-md-6 col-xs-4 bgColor  ">
-      <h6 class="text-center">Anouncements</h6><br>
+      <h4 style="color:black">Anouncements</h4><br>
 
       <ul class=" ">
         {{#each anouncements}}
@@ -35,12 +35,12 @@
         {{/each}}
       </ul>
     </div>
-    <div class="col-md-6 bgColor   rounded ">
+    <div class="col-md-6 bgColor   ">
 
-       <h6 class="text-center">Event</h6><br>
+       <h4 style="color:black">Event</h4><br>
       <ul>
         {{#each events}}
-        <li><a href="/student/student_events/{{this._id}}">{{this.event}}</li><br>
+        <li><a href="/teacher_eventsView/{{this._id}}">{{this.event}}</li><br>
         {{/each}}
       </ul>
     </div>

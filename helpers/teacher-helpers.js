@@ -219,6 +219,7 @@ module.exports={
       date:new Date()
     }
     
+    
     db.get().collection(collection.TEACHER_NOTES).insertOne(noteObj).then((data)=>{
       
       callback(data.ops[0]._id)

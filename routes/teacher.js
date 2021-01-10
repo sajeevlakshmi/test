@@ -102,8 +102,9 @@ router.post('/teacher/teacher_editProfile/:id', async (req, res) => {
   console.log(req.params.id)
   let id = req.params.id
   await teacherHelpers.updateTeacherProfile(req.params.id, req.body).then((data) => {
-    let image = req.files.image
-    if (image) {
+    
+    if (req.files) {
+      let image = req.files.image
       image.mv('./public/profile_image/' + id + '.jpg', (err, done) => {
         if (!err) {
           res.redirect('/teacher_profile')
@@ -114,6 +115,7 @@ router.post('/teacher/teacher_editProfile/:id', async (req, res) => {
 
       })
     }
+    res.redirect('/teacher_profile')
 
   })
 })
@@ -174,10 +176,12 @@ router.get('/teacher/edit-students/:id', (req, res) => {
 
 
 router.post('/teacher/edit-students/:id', (req, res) => {
-
-  let image = req.files.image
+  
+  //let image = req.files.image
   let id = req.params.id
   teacherHelpers.updateStudent(req.params.id, req.body).then((response) => {
+    if(req.files){
+      let image = req.files.image 
     image.mv('./public/images/' + id + '.jpg', (err, done) => {
       if (!err) {
         res.redirect('/teacher_studentsView')
@@ -187,6 +191,9 @@ router.post('/teacher/edit-students/:id', (req, res) => {
       }
 
     })
+  }
+  res.redirect('/teacher_studentsView')
+
   })
 })
 
@@ -381,6 +388,12 @@ router.post('/absent-students', (req, res) => {
 })
 router.get('/teacher_events', (req, res) => {
   res.render('teacher/teacher_events', { teacher: true })
+})
+router.get('/teacher_eventsView/:id',(req,res)=>{
+  teacherHelpers.getEventDetails(req.params.id).then((details)=>{
+    res.render('teacher/teacher_eventsView',{teacher:true,details})
+
+  })
 })
 router.post('/teacher_events', (req, res) => {
   let documentName = ""

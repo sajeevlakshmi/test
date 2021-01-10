@@ -7,7 +7,7 @@
                  <div id="right-side">
               <label for="">Profile Photo</label>
               <img src="/images/{{student._id}}.jpg" id="profilepic">
-               <input type="file" class="form-control" name="image" onchange="viewImage(event)">
+               <input type="file" class="form-control" name="image" onchange="viewImage(event)" accept=".jpg">
         </div>
                     <label for="">Roll No</label>
                     <input type="text" class="form-control" name="rollno"  value="{{student.rollno}}">

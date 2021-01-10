@@ -2,21 +2,35 @@ body {
   height: 100%;
   font-family: 'Open Sans', sans-serif;
 }
+body, html { overflow-x:hidden; }
 
 .bg {
-  background-image: url("/images/teacher.jpg");
-  height: 550px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/teacher4.jpg");
+  height:550px;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: auto;
+ 
+    background-size: cover;
+  position: relative;
 }
 
 .bg1 {
-  background-image: url("/images/student3.jpg");
+  
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/student3.jpg");
   height: 550px;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: auto;
+  background-size: cover;
+  position: relative;
+  
+}
+.bg2 {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/school2.jfif");
+    height: 550px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
   
 }
 
@@ -71,6 +85,7 @@ margin-top: 100px;
 .homecarousel {
   width: 75%;
   float: left;
+  
   
 }
 

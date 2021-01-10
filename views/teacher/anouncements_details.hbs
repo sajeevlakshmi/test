@@ -1,19 +1,19 @@
 <section>
-    <div class="container">
-        <div class="row pl-5">
-            <div class="col-lg-12 bgColor mt-2">
+    <div class="container-flex mt-5 pt-2 content">
+        <div class="row pl-3 ">
+            <div class="col-lg-12 col-md-6 col-xs-4 ">
                 <h2 class="text-center"> Anouncements</h2>
 
                 <form action="/anouncements-update/{{details._id}}" method="post" enctype="multipart/form-data">
                     <div class="form-group  ">
                         <label for="usr">Message:</label>
                         <input type="text" class="form-control border border-secondary" id="usr" name="message"
-                            value="{{details.message}}">
+                            value="{{details.message}}" required>
                     </div>
                     <div class="form-group ">
                         <label for="comment">Description:</label><br>
                         <textarea class="form-control border border-secondary" rows="5" id="comment"
-                            name="description">{{details.description}}</textarea>
+                            name="description" required>{{details.description}}</textarea>
                     </div>
                     <table class="table">
                         <thead>
@@ -35,7 +35,7 @@
                                         </iframe>
                                         <div class="card-body">
                                             <input type="file" class="form-control float-left " name="document"
-                                                onchange="viewPdf(event)">
+                                                onchange="viewPdf(event)" accept=".pdf" required>
                                         </div>
                                     </div>
                                 </td>
@@ -45,7 +45,7 @@
                                         <img src="/images/{{details._id}}{{details.ImgName}}.jpg" id="imageFile">
                                         <div class="card-body">
                                             <input type="file" class="form-control float-left" name="image" id="image"
-                                                onchange="viewImage(event)"><p></p>
+                                                onchange="viewImage(event)" accept=".jpg" required><p></p>
 
                                         </div>
                                     </div>
@@ -58,7 +58,7 @@
                                         </video>
                                         <div class="card-body">
                                             <input type="file" class="form-control float-left" name="video"
-                                                onchange="viewVideo(event)">
+                                                onchange="viewVideo(event)" accept=".mp4" required>
                                         </div>
                                     </div>
                                 </td>
