@@ -1,7 +1,8 @@
 <section>
-    <div class="container-flex mt-5 pt-2 content">
-        <div class="row pl-1 ">
-            <div class="col-lg-12 col-md-6 col-4">
+    {{!-- <div class="container-flex mt-5 pt-2 content"> --}}
+        <div class="row ">
+            <div class="col-md-2" style="width: 200px;"></div>
+            <div class=" col-md-10 " style="padding-left: 117px;">
                 <h2 class="text-center">Assignments</h2>
 
 
@@ -14,19 +15,24 @@
 
                         <label for="">File</label>
 
-                        <input type="file" class="form-control" name="pdf" id="file" accept=".pdf" onchange="return fileValidation()"  required>
+                        <input type="file" class="form-control" name="pdf" id="file" accept=".pdf"
+                            onchange="return fileValidation()" required>
 
 
                         <button type="submit" class="btn btn-primary mt-4 ">Submit</button>
 
-                     {{!--   <a href="/teacher/students/{{userId}}" class="btn btn-secondary float-right">Assignments
+                        {{!-- <a href="/teacher/students/{{userId}}" class="btn btn-secondary float-right">Assignments
                             Submitted</a>--}}
 
                     </form>
                 </div>
-                <div>
-
-                    <table class="table mt-5 display" id="assignTable">
+            </div>
+        </div>
+        </div>
+            <div class="row ">
+                <div class="col-md-2" style="width: 200px;"></div>
+                <div class=" col-md-10 " style="padding-left: 117px;">
+                    <table class="table table-bordered mt-5 display" id="assignTable">
                         <thead>
                             <tr>
                                 <th scope="col">Topic </th>
@@ -55,8 +61,8 @@
                 </div>
 
             </div>
-        </div>
-    </div>
+       
+
 </section>
 <script>
     $(document).ready(function () {

@@ -1,27 +1,49 @@
 <header>
-<nav class="navbar navbar-expand-lg navbar-light bg-primary ">
-  <div class="container">
-    <a class="navbar-brand text-white " href="#">Hello Student</a>
-   
-    <a href="/student/logout" class="float-right  text-white btn btn-secondary">Logout</a>
+  <div class="container-fluid">
+  <div class="row">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary " style="position: fixed;width:100%;z-index:10">
+     <div>
+      <a class="navbar-brand text-white " href="#">Hello {{user.name}}</a></div>
+      <div class="float-right">
+      <a href="/student/logout" class=" text-white btn btn-secondary float-right" style=" ">Logout</a></div>
+    </nav>
   </div>
-  </nav>
-</header>
+  </div>
+  </header>
+  <section>
+  <div class="row" >
+    <div class=" col-md-6 col-12">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light " style=" ">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <div class="navbar-nav">
+            <div class="sidebar ">
+              <a href="/student/student_home"
+                class="list-group-item list-group-item-action list-group-item-primary">Home</a>      
+              <a href="/student/student_profile"
+                class="list-group-item list-group-item-action list-group-item-light">Profile</a>
+              <a href="/student/today_task"
+                class="list-group-item list-group-item-action list-group-item-secondary">Today's Task</a>
+              <a href="/student/student_attentance"
+                class="list-group-item list-group-item-action list-group-item-primary">Attendance</a>
+              <a href="/student/student_assignments"
+                class="list-group-item list-group-item-action list-group-item-light">Assignments</a>
+              <a href="/student/student_notes"
+                class="list-group-item list-group-item-action list-group-item-secondary">Notes</a>
+              <a href="/student/student_anouncements"
+                class="list-group-item list-group-item-action list-group-item-primary">Anouncements</a>
+              <a href="/student/school_photos"
+                class="list-group-item list-group-item-action list-group-item-dark">Photos</a>
 
-<div class="list-group  col-lg-3 col-md-6 pt-2 mt-2 float-left sidebar">
-  <a href="#" class="list-group-item list-group-item-action" ></a>
+            </div>
+          </div>
+        </div>
 
-  
-  <a href="/student/student_home" class="list-group-item list-group-item-action list-group-item-primary">Home</a>
-  <a href="/student/student_profile" class="list-group-item list-group-item-action list-group-item-light">Profile</a>
-  <a href="/student/today_task" class="list-group-item list-group-item-action list-group-item-secondary">Today's Task</a>
-  <a href="/student/student_attentance" class="list-group-item list-group-item-action list-group-item-primary">Attentance</a>
-  <a href="/student/student_assignments" class="list-group-item list-group-item-action list-group-item-light">Assignments</a>
-  <a href="/student/student_notes" class="list-group-item list-group-item-action list-group-item-secondary">Notes</a>
-  <a href="/student/student_anouncements" class="list-group-item list-group-item-action list-group-item-primary">Anouncements</a>
-  <a href="/student/school_photos" class="list-group-item list-group-item-action list-group-item-dark">Photos</a>
+      </nav>
+    </div>
+  </div>
+  </section>
 
-</div> 
-       
-
-    

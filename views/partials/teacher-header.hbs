@@ -1,16 +1,27 @@
 <header>
-<nav class="navbar navbar-expand-lg navbar-light bg-primary ">
-  <div class="container">
+  <div class="container-fluid">
+  <div class="row">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary " style="position: fixed;width:100%;z-index:10">
+     <div>
     <a class="navbar-brand text-white " href="#">Hello Teacher</a>
    
     <a href="/logout" class="float-right text-white btn btn-secondary">Logout</a>
 
+ </nav>
   </div>
-  </nav>
-</header>
-<div class="list-group  col-lg-3 col-md-6 pt-2 mt-2 float-left sidebar">
-  <a href="#" class="list-group-item list-group-item-action" ></a>
-
+  </div>
+  </header>
+  <section>
+  <div class="row" >
+    <div class=" col-md-6 col-12">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light " style=" ">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <div class="navbar-nav">
+            <div class="sidebar ">
   
   <a href="/teacher_home" class="list-group-item list-group-item-action list-group-item-primary">Home</a>
   <a href="/teacher_profile" class="list-group-item list-group-item-action list-group-item-light">Profile</a>
@@ -23,6 +34,14 @@
   <a href="/teacher_photos" class="list-group-item list-group-item-action list-group-item-dark">Photos</a>
    <a href="/students_events" class="list-group-item list-group-item-action list-group-item-primary">Event Register</a>
   
-</div> 
+ </div>
+          </div>
+        </div>
+
+      </nav>
+    </div>
+  </div>
+  </section>
+
 
     

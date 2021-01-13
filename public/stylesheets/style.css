@@ -1,12 +1,14 @@
-body {
-  /* height: 100%; */
-  font-family: 'Open Sans', sans-serif;
+body{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  background-color:#f1f1f1 ;
 }
-/* body, html { overflow-x:hidden; } */
+
 
 .bg {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/teacher4.jpg");
-  height:550px;
+  height:100vh;
   background-position: center;
   background-repeat: no-repeat;
  
@@ -14,25 +16,7 @@ body {
   position: relative;
 }
 
-.bg1 {
-  
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/student3.jpg");
-  height: 550px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  
-}
-.bg2 {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/school2.jfif");
-    height: 550px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  
-}
+
 
 .footer {
   padding: 6em 0 3em;
@@ -82,18 +66,17 @@ margin-top: 100px;
 .logout_style{
   color: #fff;
 }
-.homecarousel {
+/* .homecarousel {
   width: 75%;
   float: left;
-  
-  
 }
-
    .carousel-item {
     height: 200px;
-    
+  } */
+  .slide-img{
+    width:100%;
+    height: 300px;
   }
-  
 
 textarea.form-control {
     height: 250px;
@@ -139,32 +122,40 @@ textarea.form-control {
     height: 30px;
     background-color: #4CAF50;
   }
-  .navbar {
-    overflow: hidden;
-    background-color: #333;
-    position: fixed; /* Set the navbar to fixed position */
-    top: 0; /* Position the navbar at the top of the page */
-    width: 100%; /* Full width */
-    z-index: 1;
+  .navbar-toggler {
+     overflow: hidden;
+    /* background-color: #333; */
+      /* Set the navbar to fixed position */  
+    /* top: 0; Position the navbar at the top of the page */ 
+    margin-top: 27px;
+    margin-left: -25px;
+    z-index: 20; 
+    position: fixed 
+    
   }
  
   .sidebar {
-    margin: 0;
+    margin-top: 48px;
+    left:0;
     padding: 1;
     width: 300px;
     background-color: #f1f1f1;
     position: fixed;
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
+    z-index:10;
+    /* overflow: hidden; */
   
   }
   
   /* Sidebar links */
-  .sidebar a {
+  /* .sidebar a {
     display: block;
     color: black;
     padding: 16px;
     text-decoration: none;
+    top: 81px;
+    left:0;
   }
   
   /* Active/current link */
@@ -178,16 +169,29 @@ textarea.form-control {
     background-color: #555;
     color: white;
   }
-  
+  .content{
+    margin-top: 49px;
+  padding-top: 5%;
+  padding-bottom: 20px; 
+  padding-left: 50px;
+  padding-right: 0px; 
+  }
+  .announcements, .events{
+    /* border: 2px ; */
+    background-color: #f1f1f1;
+    /* border-radius: 20px; */
+    /* padding:10px 0; */
+    min-height:200px;
+  }
   /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
-  div.content {
-    margin-left: 280px;
+  /* div.content {
+    margin-left: 300px;
     padding: 1px 16px;
     height: 1000px;
-  }
+  } */
   
   /* On screens that are less than 700px wide, make the sidebar into a topbar */
- @media screen and (max-width: 700px) {
+  /* @media screen and (max-width: 700px) {
     .sidebar {
       width: 100%;
       height: auto;
@@ -195,13 +199,13 @@ textarea.form-control {
     }
     .sidebar a {float: left;}
     div.content {margin-left: 0;}
-  }
+  } */
   
   /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
-  @media screen and (max-width: 400px) {
+  /* @media screen and (max-width: 400px) {
     .sidebar a {
       text-align: center;
       float: none;
     }
-  }               
+  }                */ 
   

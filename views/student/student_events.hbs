@@ -1,7 +1,7 @@
 <section>
-   <div class="container-flex mt-5 pt-2 content">
-        <div class="row pl-3 ">
-            <div class="col-lg-12 col-md-6 col-xs-4 ">
+  <div class="row ">
+        <div class="col-md-2" style="width: 200px;"></div>
+        <div class=" col-md-10 " style="padding-left: 99px;">
                  <h2 class="text-center"> Events</h2>
                  <a href="/student/event_register/{{details._id}}" class="btn btn-primary float-right">Register for the Event</a>
                 <table class="table mt-5 ">
@@ -28,15 +28,16 @@
         </div>
     
     
-        <div class="row pl-3 ">
-            <div class=" col-md-6 col-xs-4 ">
+       <div class="row ">
+        <div class="col-md-2" style="width: 200px;"></div>
+        <div class=" col-md-4" style="padding-left: 99px;">
             {{#if details.ImgName}}
             <img style="width: 25rem;height:18rem" src="/eventImages/{{details._id}}.jpg" id="imageFile">
             {{/if}}
         </div>
                  
       
-             <div class=" col-md-6 col-xs-4 ">
+            <div class=" col-md-4" style="padding-left: 99px;">
                     {{#if details.docName}}
                      
                             <div class="border border-secondary embed-responsive embed-responsive-4by3 ml-1" style="width:25rem;height:18rem;">
@@ -45,9 +46,12 @@
                    
                     {{/if}}
                 </div>
+       </div>
             
     
-        <div class=" col-md-6 col-xs-4 ">
+        <div class="row ">
+        <div class="col-md-2" style="width: 200px;"></div>
+        <div class=" col-md-4" style="padding-left: 99px;">
             {{#if details.filename}}
                         <div class="mt-3 embed-responsive embed-responsive-4by3 ml-1" style="width:25rem;height:18rem;">
                     <iframe class="embed-responsive-item" src="/eventVideos/{{details._id}}.mp4"></iframe>
