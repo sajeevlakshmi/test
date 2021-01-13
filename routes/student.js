@@ -310,8 +310,8 @@ router.post('/paypal_pay', (req, res) => {
         "payment_method": "paypal"
     },
     "redirect_urls": {
-        "return_url": "http://localhost:3000/student/success",
-        "cancel_url": "http://localhost:3000/student/cancel"
+        "return_url": "https://elearning-web.com/student/success",
+        "cancel_url": "https://elearning-web.com/student/cancel"
     },
     "transactions": [{
         "item_list": {
@@ -403,7 +403,7 @@ if(!paymentDetails.amount || !paymentDetails.customerId || !paymentDetails.custo
     params['ORDER_ID'] = 'TEST_'  + new Date().getTime();
     params['CUST_ID'] = paymentDetails.customerId;
     params['TXN_AMOUNT'] = paymentDetails.amount;
-    params['CALLBACK_URL'] = 'http://localhost:3000/student/callback';
+    params['CALLBACK_URL'] = 'https://elearning-web/student/callback';
     params['EMAIL'] = paymentDetails.customerEmail;
     params['MOBILE_NO'] = paymentDetails.customerPhone;
 
