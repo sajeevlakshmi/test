@@ -39,7 +39,7 @@ module.exports={
     },
     getTeacherProfile:()=>{
       return new Promise(async(resolve,reject)=>{
-        let details= await db.get().collection(collection. TEACHER_PROFILE).find().toArray()
+        let details= await db.get().collection(collection.TEACHER_PROFILE).find().toArray()
           resolve(details)
 
     })

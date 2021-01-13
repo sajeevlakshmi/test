@@ -94,7 +94,7 @@ router.get('/teacher_profile', async function (req, res) {
 
 router.post('/teacher/teacher_Profile', async (req, res) => {
   await teacherHelpers.getTeacherProfile().then((details) => {
-    res.render('teacher/teacher_editprofile', { teacher: true, details })
+    res.render('teacher/teacher_editProfile', { teacher: true, details })
   })
 })
 
