@@ -462,7 +462,7 @@ router.get('/school_photos',redirectStudLogin,(req,res)=>{
      res.json(response)
     })
   })
-  router.post("/callback", redirectStudLogin,(req, res) => {
+  router.post("/callback",(req, res) => {
     // Route for verifiying payment
     var body = '';
   
