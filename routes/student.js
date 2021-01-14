@@ -33,10 +33,10 @@ paypal.configure({
 
 const redirectStudLogin=(req,res,next)=>{
   if(req.session.studentloggedIn){
-    res.redirect('/student/student_home')  
+    next() 
   }
   else{
-    next()
+    res.redirect('/student/studentLogin') 
   } 
  }
  router.get('/',redirectStudLogin,(req,res,next)=>{
@@ -131,14 +131,14 @@ router.get('/logout', (req, res) => {
 
   res.redirect('/')
 })
-router.get('/student_assignments',(req,res)=>{
+router.get('/student_assignments',redirectStudLogin,(req,res)=>{
   userId=req.session.student._id
   teacherHelpers.getAsssignments().then((assignments)=>{
     res.render('student/student_assignments', { student: true,assignments,userId})  
     
   })
 })
-router.post('/student_assignments',(req,res)=>{
+router.post('/student_assignments',redirectStudLogin,(req,res)=>{
   userId=req.session.student._id
   let fileName=req.files.pdf.name
   console.log(fileName)
@@ -157,31 +157,31 @@ router.post('/student_assignments',(req,res)=>{
     })    
   })
 })
-router.get('/student/subAssignments/:id/:name',(req,res)=>{
+router.get('/student/subAssignments/:id/:name',redirectStudLogin,(req,res)=>{
   let id=req.params.id
   let name=req.params.name
   console.log(id)
   res.render('student/subAssignView',{id,name})
 })
-router.get('/student_notes',(req,res)=>{
+router.get('/student_notes',redirectStudLogin,(req,res)=>{
   teacherHelpers.getNotes().then((notes)=>{
     res.render('student/student_notes', { student: true,notes })
   })
 
 })
-router.get('/today_task',(req,res)=>{
+router.get('/today_task',redirectStudLogin,(req,res)=>{
   studentHelpers.todayAssignment().then((assignments)=>{
     res.render('student/today_task',{student:true,assignments})
   })
 
 })
-router.get('/student_profile',(req,res)=>{
+router.get('/student_profile',redirectStudLogin,(req,res)=>{
   let studentId=req.session.student._id
   studentHelpers.getStudentProfile(studentId).then((student)=>{
     res.render('student/student_profile',{student:true,student})
   })
 })
-router.get('/student_home', async(req, res) => {
+router.get('/student_home',redirectStudLogin, async(req, res) => {
   await teacherHelpers.getAnouncements().then((anouncements)=>{
     teacherHelpers.getEvent ().then((events)=>{
     res.render('student/student_home', { student:true,anouncements,events })
@@ -193,26 +193,26 @@ router.get('/student_home', async(req, res) => {
   })
 
 })
-router.get('/student_anouncements',(req,res)=>{
+router.get('/student_anouncements',redirectStudLogin,(req,res)=>{
   teacherHelpers.getAnouncements().then((anouncements)=>{
     res.render('student/student_anouncements',{student:true,anouncements})
 })
 })
-router.get('/anouncements-details/:id',(req,res)=>{
+router.get('/anouncements-details/:id',redirectStudLogin,(req,res)=>{
 
   teacherHelpers.getAnouncementsDetails(req.params.id).then((details)=>{
     res.render('student/stud_anouncements_details',{student:true,details})
 
   })
 })
-router.get('/anouncementView/:id/:name',(req,res)=>{
+router.get('/anouncementView/:id/:name',redirectStudLogin,(req,res)=>{
   let id=req.params.id
   let name=req.params.name
   console.log(id)
   console.log(name)
   res.render('student/announceView_pdf',{id,name})
 })
-router.get('/attentance',(req,res)=>{
+router.get('/attentance',redirectStudLogin,(req,res)=>{
     
   let studentId=req.session.student._id
   console.log(studentId)
@@ -221,13 +221,13 @@ router.get('/attentance',(req,res)=>{
   })
  
 })
-router.get('/student_events/:id',(req,res)=>{
+router.get('/student_events/:id',redirectStudLogin,(req,res)=>{
   teacherHelpers.getEventDetails(req.params.id).then((details)=>{
     res.render('student/student_events',{student:true,details})
 
   })
 })
-router.get('/event_register/:id',(req,res)=>{
+router.get('/event_register/:id',redirectStudLogin,(req,res)=>{
   let studId=req.session.student._id
   teacherHelpers.getEventDetails(req.params.id).then((details)=>{
     studentHelpers.getStudentProfile(studId).then((student)=>{
@@ -244,7 +244,7 @@ router.get('/event_register/:id',(req,res)=>{
 
   })
 })
-router.post('/event_register',(req,res)=>{
+router.post('/event_register',redirectStudLogin,(req,res)=>{
   console.log(req.body)
   let fees=req.body.fees *100
   console.log(fees)
@@ -260,7 +260,7 @@ studentHelpers.eventRegistration(req.body).then((eventId)=>{
 })
   
 })
-router.post('/verify-payment',(req,res)=>{
+router.post('/verify-payment',redirectStudLogin,(req,res)=>{
   console.log("payment_details:",req.body)
   studentHelpers.verifyPayment(req.body).then((response)=>{
     console.log("receipt",req.body['order[response][receipt]'])
@@ -275,7 +275,7 @@ router.post('/verify-payment',(req,res)=>{
    
   })          
 })
-router.get('/paytmtest/:id',(req,res)=>{
+router.get('/paytmtest/:id',redirectStudLogin,(req,res)=>{
   let studId=req.session.student._id
   teacherHelpers.getEventDetails(req.params.id).then((details)=>{
     studentHelpers.getStudentProfile(studId).then((student)=>{
@@ -285,7 +285,7 @@ router.get('/paytmtest/:id',(req,res)=>{
     })  
   })
 })
-router.get('/paypaltest/:id',(req,res)=>{
+router.get('/paypaltest/:id',redirectStudLogin,(req,res)=>{
   let studId=req.session.student._id
 console.log("eventId:",req.params.id)
   teacherHelpers.getEventDetails(req.params.id).then((details)=>{
@@ -296,7 +296,7 @@ console.log("eventId:",req.params.id)
     })  
   })
 })
-router.post('/paypal_pay', (req, res) => {
+router.post('/paypal_pay',redirectStudLogin, (req, res) => {
   console.log(req.body)
    amount=req.body.fees
    studentHelpers.eventRegistration(req.body).then((response)=>{
@@ -376,7 +376,7 @@ router.get('/cancel', (req, res) =>{
   res.send('Cancelled')
 
 })
-router.post('/paynow', [parseUrl, parseJson], (req, res) => {
+router.post('/paynow',redirectStudLogin, [parseUrl, parseJson], (req, res) => {
   
   paytmAmount=req.body.fees
   studentHelpers.eventRegistration(req.body).then((response)=>{
@@ -426,12 +426,12 @@ if(!paymentDetails.amount || !paymentDetails.customerId || !paymentDetails.custo
 });
 
 
-router.get('/student_attentance',(req,res)=>{
+router.get('/student_attentance',redirectStudLogin,(req,res)=>{
     
     res.render('student/student_attentance',{student:true})
  
 })
-router.post('/student_attentance',(req,res)=>{
+router.post('/student_attentance',redirectStudLogin,(req,res)=>{
   console.log("ajax call")
   let studentId=req.session.student._id
   let date=req.body.date
@@ -442,7 +442,7 @@ router.post('/student_attentance',(req,res)=>{
   })
 
 })
-router.get('/school_photos',(req,res)=>{
+router.get('/school_photos',redirectStudLogin,(req,res)=>{
   teacherHelpers.getSchoolPhotos().then((photos)=>{
     res.render('student/school_photos',{student:true,photos})
   }) 
@@ -455,16 +455,15 @@ router.get('/school_photos',(req,res)=>{
 
     res.render('student/registration_failed',{student:true})
   })
-  router.post('/paypal-register',(req,res)=>{
+  router.post('/paypal-register',redirectStudLogin,(req,res)=>{
    
     console.log(req.body)
     studentHelpers.eventRegistration(req.body).then((response)=>{
      res.json(response)
     })
   })
-  router.post("/callback", (req, res) => {
+  router.post("/callback", redirectStudLogin,(req, res) => {
     // Route for verifiying payment
-  console.log("hello PAYTM 2")
     var body = '';
   
     req.on('data', function (data) {

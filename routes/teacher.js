@@ -12,11 +12,11 @@ const { ObjectID } = require('mongodb');
 
 const verifyLogin = (req, res, next) => {
   if (req.session.loggedIn) {
-    res.redirect('/teacher_home')
+    next()
 
   }
   else {
-    next()
+    res.redirect('/teacher')
   }
 
 }
@@ -26,13 +26,13 @@ router.get('/', function (req, res, next) {
   res.render('index')
 })
 
-router.get('/teacher', verifyLogin, (req, res) => {
+router.get('/teacher', (req, res) => {
   let loginErr = req.session.loginErr
   res.render('teacher/teacherLogin', { loginErr })
   req.session.loginErr = false
 
 })
-router.get('/teacher_home', async (req, res) => {
+router.get('/teacher_home',verifyLogin, async (req, res) => {
   await teacherHelpers.getAnouncements().then((anouncements) => {
        teacherHelpers.getEvent().then((events)=>{
          console.log(events)
@@ -43,7 +43,7 @@ router.get('/teacher_home', async (req, res) => {
 })
 
 
-router.get('/teacher/students/:id', (req, res) => {
+router.get('/teacher/students/:id',verifyLogin, (req, res) => {
   studentHelpers.getSubAsssignments(req.params.id).then((subAssign) => {
     studentHelpers.getWeekAttentance(req.params.id).then((attentance)=>{
      res.render('teacher/students_subAssignments', { teacher: true, subAssign,attentance})
@@ -80,25 +80,25 @@ router.get('/logout', (req, res) => {
 })
 
 
-router.get('/teacher_attentanceview', async (req, res) => {
+router.get('/teacher_attentanceview',verifyLogin ,async (req, res) => {
   await teacherHelpers.getAllStudents().then((students) => {
     res.render('teacher/teacher_attentanceview', { teacher: true, students })
   })
 })
 
-router.get('/teacher_profile', async function (req, res) {
+router.get('/teacher_profile',verifyLogin, async function (req, res) {
   await teacherHelpers.getTeacherProfile().then((details) => {
     res.render('teacher/teacher_profile', { teacher: true, details })
   })
 })
 
-router.post('/teacher/teacher_Profile', async (req, res) => {
+router.post('/teacher/teacher_Profile',verifyLogin, async (req, res) => {
   await teacherHelpers.getTeacherProfile().then((details) => {
     res.render('teacher/teacher_editProfile', { teacher: true, details })
   })
 })
 
-router.post('/teacher/teacher_editProfile/:id', async (req, res) => {
+router.post('/teacher/teacher_editProfile/:id',verifyLogin, async (req, res) => {
   console.log(req.params.id)
   let id = req.params.id
   await teacherHelpers.updateTeacherProfile(req.params.id, req.body).then((data) => {
@@ -122,17 +122,17 @@ router.post('/teacher/teacher_editProfile/:id', async (req, res) => {
 
 
 
-router.get('/teacher_studentsView', async (req, res) => {
+router.get('/teacher_studentsView',verifyLogin, async (req, res) => {
   await teacherHelpers.getAllStudents().then((students) => {
     res.render('teacher/teacher_studentsView', { teacher: true, students })
   })
 })
 
-router.get('/teacher/add-students', (req, res) => {
+router.get('/teacher/add-students',verifyLogin, (req, res) => {
   res.render('teacher/teacher_addStudents', { teacher: true })
 })
 
-router.post('/teacher/add-students', (req, res) => {
+router.post('/teacher/add-students',verifyLogin, (req, res) => {
   let image = req.files.image
   teacherHelpers.addStudent(req.body, (id) => {
 
@@ -147,10 +147,10 @@ router.post('/teacher/add-students', (req, res) => {
     })
   })
 })
-router.get('/teacher_photos', (req, res) => {
+router.get('/teacher_photos',verifyLogin, (req, res) => {
   res.render('teacher/teacher_photos', { teacher: true })
 })
-router.post('/teacher_photos', (req, res) => {
+router.post('/teacher_photos',verifyLogin, (req, res) => {
 
   console.log(req.body)
   teacherHelpers.addPhotos(req.body, (id) => {
@@ -168,14 +168,14 @@ router.post('/teacher_photos', (req, res) => {
 })
 
 
-router.get('/teacher/edit-students/:id', (req, res) => {
+router.get('/teacher/edit-students/:id',verifyLogin, (req, res) => {
   teacherHelpers.getStudentDetails(req.params.id).then((student) => {
     res.render('teacher/t_editStudent', { teacher: true, student })
   })
 })
 
 
-router.post('/teacher/edit-students/:id', (req, res) => {
+router.post('/teacher/edit-students/:id',verifyLogin, (req, res) => {
   
   //let image = req.files.image
   let id = req.params.id
@@ -197,25 +197,25 @@ router.post('/teacher/edit-students/:id', (req, res) => {
   })
 })
 
-router.get('/teacher/delete-students/:id', (req, res) => {
+router.get('/teacher/delete-students/:id',verifyLogin, (req, res) => {
   teacherHelpers.deleteStudents(req.params.id).then((response) => {
     res.redirect('/teacher_studentsView')
   })
 })
 
-router.get('/teacher/delete-assignments/:id', async (req, res) => {
+router.get('/teacher/delete-assignments/:id',verifyLogin, async (req, res) => {
   console.log("hello")
   await teacherHelpers.deleteAssignments(req.params.id).then((response) => {
     res.redirect('/teacher_assignments')
   })
 })
-router.get('/teacher_assignments', (req, res) => {
+router.get('/teacher_assignments', verifyLogin,(req, res) => {
   teacherHelpers.getAsssignments().then((assignments) => {
     res.render('teacher/teacher_assignments', { teacher: true, assignments })
   })
 
 })
-router.post('/teacher_assignments', (req, res) => {
+router.post('/teacher_assignments',verifyLogin, (req, res) => {
   let pdf = req.files.pdf
   let filename = pdf.name
   teacherHelpers.addAssignments(req.body, filename, (id) => {
@@ -228,14 +228,14 @@ router.post('/teacher_assignments', (req, res) => {
      
 
 
-router.get('/teacher/assignments/:id/:name', (req, res) => {
+router.get('/teacher/assignments/:id/:name',verifyLogin, (req, res) => {
   let id = req.params.id
   let name = req.params.name
   console.log(id)
   res.render('teacher/view_pdf', { id, name })
 })
 
-router.get('/teacher_anouncements', (req, res) => {
+router.get('/teacher_anouncements',verifyLogin, (req, res) => {
   res.render('teacher/teacher_anouncements', { teacher: true })
 })
 router.post('/teacher_anouncements', (req, res) => {
@@ -281,14 +281,14 @@ router.post('/teacher_anouncements', (req, res) => {
   })
 
 })
-router.get('/anouncements-details/:id', (req, res) => {
+router.get('/anouncements-details/:id',verifyLogin, (req, res) => {
 
   teacherHelpers.getAnouncementsDetails(req.params.id).then((details) => {
     res.render('teacher/anouncements_details', { teacher: true, details })
 
   })
 })
-router.post('/anouncements-update/:id', (req, res) => {
+router.post('/anouncements-update/:id',verifyLogin, (req, res) => {
   let document = req.files.document
   let documentName = document.name
   let video = req.files.video
@@ -331,13 +331,13 @@ router.post('/anouncements-update/:id', (req, res) => {
 
 })
 
-router.get('/teacher_notes', (req, res) => {
+router.get('/teacher_notes', verifyLogin,(req, res) => {
   teacherHelpers.getNotes().then((notes) => {
     res.render('teacher/teacher_notes', { teacher: true, notes })
   })
 
 })
-router.post('/teacher_notes', (req, res) => {
+router.post('/teacher_notes',verifyLogin, (req, res) => {
   let document = req.files.document
   let documentName = document.name
   let video = req.files.video
@@ -368,7 +368,7 @@ router.post('/teacher_notes', (req, res) => {
   })
 
 })
-router.get('/teacher/notes/:id/:name', (req, res) => {
+router.get('/teacher/notes/:id/:name', verifyLogin,(req, res) => {
   let id = req.params.id
   let name = req.params.name
   console.log(id)
@@ -381,21 +381,21 @@ router.get('/teacher/delete-notes/:id', async (req, res) => {
   })
 })
 
-router.post('/absent-students', (req, res) => {
+router.post('/absent-students', verifyLogin,(req, res) => {
   teacherHelpers.attentanceList(req.body.date).then((response) => {
     res.json({ students: response })
   })
 })
-router.get('/teacher_events', (req, res) => {
+router.get('/teacher_events',verifyLogin, (req, res) => {
   res.render('teacher/teacher_events', { teacher: true })
 })
-router.get('/teacher_eventsView/:id',(req,res)=>{
+router.get('/teacher_eventsView/:id',verifyLogin,(req,res)=>{
   teacherHelpers.getEventDetails(req.params.id).then((details)=>{
     res.render('teacher/teacher_eventsView',{teacher:true,details})
 
   })
 })
-router.post('/teacher_events', (req, res) => {
+router.post('/teacher_events',verifyLogin, (req, res) => {
   let documentName = ""
   let filename = ""
   let imageName = ""
@@ -433,7 +433,7 @@ router.post('/teacher_events', (req, res) => {
 
   })
 })
-router.get('/students_events',(req,res)=>{
+router.get('/students_events',verifyLogin,(req,res)=>{
   teacherHelpers.fetchEventDetails().then((details)=>{
     console.log(details)
    res.render('teacher/student_eventRegister',{teacher:true,details})
