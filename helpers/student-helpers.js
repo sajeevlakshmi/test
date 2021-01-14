@@ -310,7 +310,26 @@ module.exports = {
 
     })
   },
+  checkEventRegister:(stdId,event)=>{
+    console.log(stdId)
+    console.log(event)
+    let response={}
+    return new Promise(async(resolve,reject)=>{
+ let entry= await db.get().collection(collection.EVENT_REGISTER).findOne({ $and: [{ studId: stdId }, { eventName:event },{status:'registered'}] })
+ console.log("student registered",entry)
+ if(entry){
+    response.status=true
+    console.log("entry found",response.status)
+    resolve(response)
+  }
+  else{
+    response.status=false
+    console.log("entry not found",response.status)
+    resolve(response)
+  }
+    })
 
+  },
   eventRegistration: (details) => {
     console.log("registeration:",details)
     let eventObj={

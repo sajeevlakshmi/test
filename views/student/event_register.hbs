@@ -64,7 +64,16 @@
                     dataType: 'json', // what type of data do we expect back from the server
                     success: (response) => {
                         console.log(response)
-                        razorpayPayment(response)
+                        if(response.registered)
+                        {
+                           alert("already registered")
+                             
+                            }
+                            else{
+                                razorpayPayment(response)
+                            }
+                             
+        
                     }
 
                 })

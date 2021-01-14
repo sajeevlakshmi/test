@@ -100,7 +100,7 @@ router.post('/resend-otp/:otp_id',(req,res)=>{
 })
 router.get('/studentLogin',(req,res)=>{
   if (req.session.studentloggedIn) {
-    res.render('student/student_home', {student:true, user })
+    res.redeiect('/student/student_home')
   } else {
     let loginErr = req.session.loginErr
     res.render('student/studentLogin', { loginErr })
@@ -115,9 +115,10 @@ router.post('/studentLogin',(req,res)=>{
      
       req.session.student = response.user
       req.session.studentloggedIn = true
-      let user = req.session.student
+      let student = req.session.student
       console.log(req.session.student)
-      res.redirect('/student/student_home')
+      res.render('student/student_home', {student:true, student })
+     
     }
     else {
       req.session.loginErr = "Invalid Username or Password"
@@ -132,9 +133,10 @@ router.get('/logout', (req, res) => {
   res.redirect('/')
 })
 router.get('/student_assignments',redirectStudLogin,(req,res)=>{
+  let student = req.session.student
   userId=req.session.student._id
   teacherHelpers.getAsssignments().then((assignments)=>{
-    res.render('student/student_assignments', { student: true,assignments,userId})  
+    res.render('student/student_assignments', { student: true,assignments,userId,student})  
     
   })
 })
@@ -164,14 +166,16 @@ router.get('/student/subAssignments/:id/:name',redirectStudLogin,(req,res)=>{
   res.render('student/subAssignView',{id,name})
 })
 router.get('/student_notes',redirectStudLogin,(req,res)=>{
+  let student = req.session.student
   teacherHelpers.getNotes().then((notes)=>{
-    res.render('student/student_notes', { student: true,notes })
+    res.render('student/student_notes', { student: true,notes,student })
   })
 
 })
 router.get('/today_task',redirectStudLogin,(req,res)=>{
   studentHelpers.todayAssignment().then((assignments)=>{
-    res.render('student/today_task',{student:true,assignments})
+    let student = req.session.student
+    res.render('student/today_task',{student:true,assignments,student})
   })
 
 })
@@ -183,8 +187,9 @@ router.get('/student_profile',redirectStudLogin,(req,res)=>{
 })
 router.get('/student_home',redirectStudLogin, async(req, res) => {
   await teacherHelpers.getAnouncements().then((anouncements)=>{
+    let student = req.session.student
     teacherHelpers.getEvent ().then((events)=>{
-    res.render('student/student_home', { student:true,anouncements,events })
+    res.render('student/student_home', { student:true,anouncements,events,student})
 
    })
     //console.log("reached student home")
@@ -195,13 +200,15 @@ router.get('/student_home',redirectStudLogin, async(req, res) => {
 })
 router.get('/student_anouncements',redirectStudLogin,(req,res)=>{
   teacherHelpers.getAnouncements().then((anouncements)=>{
-    res.render('student/student_anouncements',{student:true,anouncements})
+    let student = req.session.student
+    res.render('student/student_anouncements',{student:true,anouncements,student})
 })
 })
 router.get('/anouncements-details/:id',redirectStudLogin,(req,res)=>{
 
   teacherHelpers.getAnouncementsDetails(req.params.id).then((details)=>{
-    res.render('student/stud_anouncements_details',{student:true,details})
+    let student = req.session.student
+    res.render('student/stud_anouncements_details',{student:true,details,student})
 
   })
 })
@@ -223,7 +230,8 @@ router.get('/attentance',redirectStudLogin,(req,res)=>{
 })
 router.get('/student_events/:id',redirectStudLogin,(req,res)=>{
   teacherHelpers.getEventDetails(req.params.id).then((details)=>{
-    res.render('student/student_events',{student:true,details})
+    let student = req.session.student
+    res.render('student/student_events',{student:true,details,student})
 
   })
 })
@@ -235,7 +243,7 @@ router.get('/event_register/:id',redirectStudLogin,(req,res)=>{
      if(details.fees)
       res.render('student/event_register',{student:true,details,student})
       else{
-        res.render('student/register-success',{student:true})
+        res.render('student/register-success',{student:true,student})
       }
      
     })
@@ -246,18 +254,26 @@ router.get('/event_register/:id',redirectStudLogin,(req,res)=>{
 })
 router.post('/event_register',redirectStudLogin,(req,res)=>{
   console.log(req.body)
+  let studId=req.body.studId
+  let event=req.body.event
   let fees=req.body.fees *100
   console.log(fees)
-studentHelpers.eventRegistration(req.body).then((eventId)=>{
- // if(req.body['payment-mode']=='razorpay')
-  
-    studentHelpers.generateRazorpay(eventId,fees).then((response)=>{
-      res.json({response})
-
-    })
-  
- 
-})
+  studentHelpers.checkEventRegister(studId,event).then((response)=>{
+    console.log(response.status)
+if(response.status==true){
+res.json({registered:true})
+}
+else{
+  studentHelpers.eventRegistration(req.body).then((eventId)=>{
+    // if(req.body['payment-mode']=='razorpay')
+     
+       studentHelpers.generateRazorpay(eventId,fees).then((response)=>{
+         res.json({response})
+   
+       })
+   })
+}
+  })
   
 })
 router.post('/verify-payment',redirectStudLogin,(req,res)=>{
@@ -278,11 +294,19 @@ router.post('/verify-payment',redirectStudLogin,(req,res)=>{
 router.get('/paytmtest/:id',redirectStudLogin,(req,res)=>{
   let studId=req.session.student._id
   teacherHelpers.getEventDetails(req.params.id).then((details)=>{
-    studentHelpers.getStudentProfile(studId).then((student)=>{
-     // console.log(student)
-      //console.log(details)
-      res.render('student/paytmtest',{student:true,details,student})
-    })  
+    let event=details.event
+    studentHelpers.checkEventRegister(studId,event).then((response)=>{
+      if(response.status==true){
+        res.render('student/registered',{student:true})
+      }
+      else{
+        studentHelpers.getStudentProfile(studId).then((student)=>{
+
+           res.render('student/paytmtest',{student:true,details,student})
+         })
+      }
+    })
+     
   })
 })
 router.get('/paypaltest/:id',redirectStudLogin,(req,res)=>{
@@ -427,8 +451,8 @@ if(!paymentDetails.amount || !paymentDetails.customerId || !paymentDetails.custo
 
 
 router.get('/student_attentance',redirectStudLogin,(req,res)=>{
-    
-    res.render('student/student_attentance',{student:true})
+  let student = req.session.student
+    res.render('student/student_attentance',{student:true,student})
  
 })
 router.post('/student_attentance',redirectStudLogin,(req,res)=>{
@@ -444,7 +468,8 @@ router.post('/student_attentance',redirectStudLogin,(req,res)=>{
 })
 router.get('/school_photos',redirectStudLogin,(req,res)=>{
   teacherHelpers.getSchoolPhotos().then((photos)=>{
-    res.render('student/school_photos',{student:true,photos})
+    let student = req.session.student
+    res.render('student/school_photos',{student:true,photos,student})
   }) 
   })
   router.get('/register_success',(req,res)=>{
