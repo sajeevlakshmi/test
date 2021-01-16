@@ -117,7 +117,7 @@ router.post('/studentLogin',(req,res)=>{
       req.session.studentloggedIn = true
       let student = req.session.student
       console.log(req.session.student)
-      res.render('student/student_home', {student:true, student })
+      res.redirect('/student/student_home')
      
     }
     else {
