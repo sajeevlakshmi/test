@@ -1,77 +1,83 @@
 <section>
-    <div class="container-flex mt-5 pt-2 content">
-        <div class="row pl-3 ">
-            <div class="col-lg-12 col-md-6 col-xs-4 ">
-                <h2 class="text-center"> Anouncements</h2>
+    <div class="row ">
+        <div class="col-md-2" style="width: 200px;"></div>
+        <div class=" col-md-10 " style="padding-left: 105px;">
+            <h2 class="text-center"> Anouncements</h2>
 
-                <form action="/anouncements-update/{{details._id}}" method="post" enctype="multipart/form-data">
-                    <div class="form-group  ">
-                        <label for="usr">Message:</label>
-                        <input type="text" class="form-control border border-secondary" id="usr" name="message"
-                            value="{{details.message}}" required>
-                    </div>
-                    <div class="form-group ">
-                        <label for="comment">Description:</label><br>
-                        <textarea class="form-control border border-secondary" rows="5" id="comment"
-                            name="description" required>{{details.description}}</textarea>
-                    </div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-
-                                <th scope="col">PDF</th>
-                                <th scope="col">Image</th>
-                                <th scope="col">Video</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="card" style="width: 15rem;height:11rem">
-                                        <iframe id="viewer" src="/document/{{details._id}}{{details.docName}}.pdf"
-                                            frameborder="0" allowfullscreen="">{{details.docName}}
-                                            <a
-                                                href="/document/{{details._id}}{{details.docName}}.pdf">{{details.docName}}</a>
-                                        </iframe>
-                                        <div class="card-body">
-                                            <input type="file" class="form-control float-left " name="document"
-                                                onchange="viewPdf(event)" accept=".pdf" required>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="card" style="width: 15rem;">
-
-                                        <img src="/images/{{details._id}}{{details.ImgName}}.jpg" id="imageFile">
-                                        <div class="card-body">
-                                            <input type="file" class="form-control float-left" name="image" id="image"
-                                                onchange="viewImage(event)" accept=".jpg" required><p></p>
-
-                                        </div>
-                                    </div>
-
-                                </td>
-                                <td>
-                                    <div class="card" style="width: 15rem;">
-                                        <video controls loop width="200px" height="125px" id="videopic">
-                                            <source src="/video/{{details._id}}{{details.filename}}.mp4">
-                                        </video>
-                                        <div class="card-body">
-                                            <input type="file" class="form-control float-left" name="video"
-                                                onchange="viewVideo(event)" accept=".mp4" required>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                    <button type="submit" id="submit" class="btn btn-success mt-4">Update</button>
-                </form>
-            </div>
-
+            <form action="/anouncements-update/{{details._id}}" method="post" enctype="multipart/form-data">
+                <div class="form-group  ">
+                    <label for="usr">Message:</label>
+                    <input type="text" class="form-control border border-secondary" id="usr" name="message"
+                        value="{{details.message}}" required>
+                </div>
+                <div class="form-group ">
+                    <label for="comment">Description:</label><br>
+                    <textarea class="form-control border border-secondary" rows="5" id="comment" name="description"
+                        required>{{details.description}}</textarea>
+                </div>
+            </form>
         </div>
     </div>
+    <div class="row ">
+        <div class="col-md-2" style="width: 200px;"></div>
+        <div class=" col-md-4 pt-3" style="padding-left: 99px;">
+            <table class="table">
+                <thead>
+                    <tr>
+
+                        <th scope="col">PDF</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Video</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="card" style="width: 15rem;height:11rem">
+                                <iframe id="viewer" src="/document/{{details._id}}{{details.docName}}.pdf"
+                                    frameborder="0" allowfullscreen="">{{details.docName}}
+                                    <a href="/document/{{details._id}}{{details.docName}}.pdf">{{details.docName}}</a>
+                                </iframe>
+                                <div class="card-body">
+                                    <input type="file" class="form-control float-left " name="document"
+                                        onchange="viewPdf(event)" accept=".pdf" required>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="card" style="width: 15rem;">
+
+                                <img src="/images/{{details._id}}{{details.ImgName}}.jpg" id="imageFile">
+                                <div class="card-body">
+                                    <input type="file" class="form-control float-left" name="image" id="image"
+                                        onchange="viewImage(event)" accept=".jpg" required>
+                                    <p></p>
+
+                                </div>
+                            </div>
+
+                        </td>
+                        <td>
+                            <div class="card" style="width: 15rem;">
+                                <video controls loop width="200px" height="125px" id="videopic">
+                                    <source src="/video/{{details._id}}{{details.filename}}.mp4">
+                                </video>
+                                <div class="card-body">
+                                    <input type="file" class="form-control float-left" name="video"
+                                        onchange="viewVideo(event)" accept=".mp4" required>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <button type="submit" id="submit" class="btn btn-success mt-4">Update</button>
+            
+        </div>
+
+    </div>
+
 </section>
 <script>
     function viewImage(event) {
@@ -93,15 +99,15 @@
 
     }
     const form = document.querySelector('form');
-const image = document.getElementById('image');
+    const image = document.getElementById('image');
 
-const para = document.querySelector('p');
+    const para = document.querySelector('p');
 
-form.onsubmit = function(e) {
-  if (image === '' ) {
-    e.preventDefault();
-    para.textContent = 'You need to upload image!';
-    console.log("###")
-  }
-}
+    form.onsubmit = function (e) {
+        if (image === '') {
+            e.preventDefault();
+            para.textContent = 'You need to upload image!';
+            console.log("###")
+        }
+    }
 </script>
