@@ -42,7 +42,7 @@ const redirectStudLogin=(req,res,next)=>{
  router.get('/',redirectStudLogin,(req,res,next)=>{
   res.render('student/studentLogin')
 })
-router.get('/send-otp',redirectStudLogin,(req,res)=>{
+router.get('/send-otp',(req,res)=>{
   res.render('student/send-otp')
 })
  router.post('/send-otp',(req,res)=>{
