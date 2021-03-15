@@ -43,8 +43,8 @@ db.connect((err)=>{
 })
 
 var store = new MongoDBStore({
-  /* uri: 'mongodb://localhost:27017',*/
-  uri:'mongodb+srv://eclass:krhrttj5PZ@3.@a@elearning.b3fkm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+   uri: 'mongodb://localhost:27017',
+  // uri:'mongodb+srv://eclass:krhrttj5PZ@3.@a@elearning.b3fkm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
   databaseName:'classroom',
   collection: 'mySessions'
 });
